@@ -204,10 +204,10 @@ int main(int argc, char *argv[])
             power = get_strength_dbm(presult);
 
             channel = getChannelFromFrequency(freq);
-            essid_crc = calcrc_bytes((unsigned char*)essid, strlen(essid));
+//            essid_crc = calcrc_bytes((unsigned char*)essid, strlen(essid));
 
-            LOG_TRACE("bssid:[%s], channel:[%2d], pow:[%d dBm], essid_crc:[%02x], essid:[%s]",
-                    bssid, channel, power, essid_crc, essid);
+            LOG_TRACE("bssid:[%s], channel:[%2d], pow:[%d dBm], essid:[%s]",
+                    bssid, channel, power, essid);
             add_channel(channel);
             presult = presult->next;
         }
