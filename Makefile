@@ -6,8 +6,8 @@ OBJS = $(patsubst %.c,%.o,$(SRCS))
 
 LIBIW = -liw
 TIMER = -lrt
-AIRKISS_LOG = ./libairkiss_log.a
-AIRKISS = ./libairkiss.a
+AIRKISS_LOG = libairkiss_log.a
+AIRKISS = libairkiss.a
 
 CC = gcc
 CCFLAGS = -c -g -Wall -Wno-unused-but-set-variable
