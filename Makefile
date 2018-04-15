@@ -14,9 +14,9 @@ CCFLAGS = -c -g -Wall -Wno-unused-but-set-variable
 
 all: $(ELF)
 $(ELF) : $(OBJS)
-	$(CC) $^ -o $@ $(LIBIW) $(TIMER) 
+	$(CC) $^ -o $@ $(LIBIW) $(TIMER)
 $(OBJS):%.o:%.c
-	$(CC) $(CCFLAGS) $< -o $@
+	$(CC) $(CCFLAGS) $< -o $@ $(AIRKISS) $(AIRKISS_LOG)
 
 clean:
 	rm -f  $(ELF) $(OBJS)
