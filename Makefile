@@ -1,12 +1,13 @@
 ELF = airkiss
 SRCS = main.c 
 SRCS += capture/common.c capture/osdep.c capture/linux.c capture/radiotap/radiotap-parser.c
-SRCS += utils/wifi_scan.c airkiss.c
+SRCS += utils/wifi_scan.c
 OBJS = $(patsubst %.c,%.o,$(SRCS))
 
 LIBIW = -liw
 TIMER = -lrt
-AIRKISS = -L./libs -lairkiss_log
+AIRKISS_LOG = ./libairkiss_log.a
+AIRKISS = ./libairkiss.a
 
 CC = gcc
 CCFLAGS = -c -g -Wall -Wno-unused-but-set-variable
