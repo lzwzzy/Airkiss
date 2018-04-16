@@ -180,9 +180,15 @@ int udp_broadcast(unsigned char random, int port) {
     int i;
     useconds_t usecs = 1000 * 20;
     for (i = 0; i < 50; i++) {
-        sendto(fd, (const char *) random, 1, 0, (struct sockaddr *) &addr, sizeof(struct sockaddr));
+        int ret = sendto(fd, (const char *) &random, strlen((const char *) &random), 0, (struct sockaddr *) &addr, sizeof(struct sockaddr));
+        if (ret < 0){
+            LOG_TRACE("Send error!");
+            return 1;
+        }else{
+            LOG_TRACE("Sended %d package", i + 1);
+        }
         usleep(usecs);
-        LOG_TRACE("Sended %d package", i + 1);
+
     }
     LOG_TRACE("all random to broadcast success sended");
 
