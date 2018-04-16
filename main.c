@@ -159,7 +159,7 @@ int udp_broadcast(unsigned char random, int port) {
     struct sockaddr_in addr;
 
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = INADDR_BROADCAST;
+    addr.sin_addr.s_addr = inet_addr(INADDR_BROADCAST);
     addr.sin_port = htons(port);
 
     fd = socket(AF_INET, SOCK_DGRAM, 0);
