@@ -147,17 +147,18 @@ int udp_broadcast(unsigned char random, int port)
     addr.sin_addr.s_addr = INADDR_BROADCAST;
     addr.sin_port = htons(port);
     
-    fd = socket(AF_INET, SOCK_DGRAM, 0);
+    fd = socket(PF_INET, SOCK_DGRAM, 0);
     if (fd < 0)
     {
         LOG_TRACE("Error to create socket, reason: %s", strerror(errno));
         return 1;
     } 
     
-    err = setsockopt(fd, SOL_SOCKET, SO_BROADCAST, (char *) &enabled, sizeof(enabled));
+    err = setsockopt(fd, SOL_SOCKET, SO_BROADCAST, &enabled, sizeof(enabled));
     if(err == -1)
     {
         close(fd);
+        LOG_TRACE("socket fail! \n");
         return 1;
     }
     
@@ -166,7 +167,7 @@ int udp_broadcast(unsigned char random, int port)
     useconds_t usecs = 1000*20;
     for(i=0;i<50;i++)
     {
-        sendto(fd, (unsigned char *)&random, 1, 0, (struct sockaddr*)&addr, sizeof(struct sockaddr));
+        sendto(fd, (const char *)random, strlen((const char *) random), 0, (struct sockaddr*)&addr, sizeof(struct sockaddr));
         usleep(usecs);
     }
 
