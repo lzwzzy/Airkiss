@@ -163,22 +163,20 @@ int udp_broadcast(unsigned char random, int port) {
     addr.sin_addr.s_addr = INADDR_BROADCAST;
     addr.sin_port = htons(port);
 
-    LOG_TRACE("%s", INADDR_BROADCAST);
-
     fd = socket(AF_INET, SOCK_DGRAM, 0);
     if (fd < 0) {
         LOG_TRACE("Error to create socket, reason: %s", strerror(errno));
         return 1;
     }
 
-    err = setsockopt(fd, SOL_SOCKET, SO_BROADCAST, (char*)&enabled, sizeof(enabled));
+    err = setsockopt(fd, SOL_SOCKET, SO_BROADCAST, (char *)&enabled, sizeof(enabled));
     if (err == -1) {
         close(fd);
         LOG_TRACE("socket fail! \n");
         return 1;
     }
 
-    LOG_TRACE("Sending random to broadcast: %s", INADDR_BROADCAST);
+    //LOG_TRACE("Sending random to broadcast: %s", INADDR_BROADCAST);
     int i;
     useconds_t usecs = 1000 * 20;
     for (i = 0; i < 50; i++) {
