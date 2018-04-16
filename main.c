@@ -157,10 +157,13 @@ int udp_broadcast(unsigned char random, int port) {
     int enabled = 1;
     int err;
     struct sockaddr_in addr;
+    bzero(&addr,sizeof(struct sockaddr_in));
 
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
     addr.sin_port = htons(port);
+
+    LOG_TRACE("%s", INADDR_BROADCAST);
 
     fd = socket(AF_INET, SOCK_DGRAM, 0);
     if (fd < 0) {
@@ -168,7 +171,7 @@ int udp_broadcast(unsigned char random, int port) {
         return 1;
     }
 
-    err = setsockopt(fd, SOL_SOCKET, SO_BROADCAST, &enabled, sizeof(enabled));
+    err = setsockopt(fd, SOL_SOCKET, SO_BROADCAST, (char*)&enabled, sizeof(enabled));
     if (err == -1) {
         close(fd);
         LOG_TRACE("socket fail! \n");
