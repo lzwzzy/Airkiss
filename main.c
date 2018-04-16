@@ -169,7 +169,9 @@ int udp_broadcast(unsigned char random, int port)
     {
         sendto(fd, (const char *)random, strlen((const char *) random), 0, (struct sockaddr*)&addr, sizeof(struct sockaddr));
         usleep(usecs);
+        LOG_TRACE("Sended %d package", i);
     }
+    LOG_TRACE("all random to broadcast success sended");
 
     close(fd);
     return 0;
