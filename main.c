@@ -72,7 +72,8 @@ int process_airkiss(const unsigned char *packet, int size)
     {
         LOG_TRACE("Airkiss completed.");
         airkiss_get_result(akcontex, &ak_result);
-        LOG_TRACE("Result:\nssid_crc:[%x]\nkey_len:[%d]\nkey:[%s]\nrandom:[0x%02x]", 
+        LOG_TRACE("Result:\nssid:[%x] \n ssid_crc:[%x]\nkey_len:[%d]\nkey:[%s]\nrandom:[0x%02x]",
+            ak_result.ssid
             ak_result.reserved,
             ak_result.pwd_length,
             ak_result.pwd,
