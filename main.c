@@ -103,6 +103,10 @@ int process_airkiss(const unsigned char *packet, int size)
         }
         pclose(fstream);
 
+        useconds_t usecs = 1000*1000;
+
+        usleep(usecs);
+
         udp_broadcast(ak_result.random, 10000);
     }
     pthread_mutex_unlock(&lock);
