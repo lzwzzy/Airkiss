@@ -157,10 +157,10 @@ int udp_broadcast(unsigned char random, int port) {
     int enabled = 1;
     int err;
     struct sockaddr_in addr;
-    bzero(&addr,sizeof(struct sockaddr_in));
+//    bzero(&addr,sizeof(struct sockaddr_in));
 
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
+    addr.sin_addr.s_addr = INADDR_BROADCAST;
     addr.sin_port = htons(port);
 
     LOG_TRACE("%s", INADDR_BROADCAST);
