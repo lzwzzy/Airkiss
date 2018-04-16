@@ -96,7 +96,7 @@ int process_airkiss(const unsigned char *packet, int size) {
         }
         pclose(fstream);
 
-        useconds_t usecs = 5 * 1000 * 000;
+        useconds_t usecs = 5 * 1000 * 1000;
 
         usleep(usecs);
 
