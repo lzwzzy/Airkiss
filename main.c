@@ -80,7 +80,29 @@ int process_airkiss(const unsigned char *packet, int size)
             ak_result.random);
 
         //TODO: scan and connect to wifi
-        
+
+        FILE *fstream = NULL;
+        char buff[1024];
+        memset(buff,0,sizeof(buff));
+        char str[80];
+        strcpy(str, "sudo bash connect_wifi ");
+        strcat(str, ak_result.ssid);
+        strcat(str, " ");
+        strcat(str, ak_result.pwd);
+        const char* shell = str;
+        if(NULL==(fstream=popen(shell, "r")))
+        {
+            fprintf(stderr,"execute command failed: %s",strerror(errno));
+            return 1;
+        }
+
+        while(NULL!=fgets(buff, sizeof(buff), fstream)) {
+
+            printf("%s",buff);
+
+        }
+        pclose(fstream);
+
         udp_broadcast(ak_result.random, 10000);
     }
     pthread_mutex_unlock(&lock);
